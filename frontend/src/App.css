@@ -1,6 +1,24 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.header {
+  width: 100%;
+  margin: 0;
+  padding: 1rem 0;
+  background-color: #fefefe;
+}
+
+.header .title {
+  color: #e60012;
+  font-size: 34px;
+}
+
+.formContainer {
+  width: 600px;
+  margin: 2rem auto;
+  padding: 2rem 2rem;
+  background-color: #fefefe;
+}
+
+.tableContainer {
+  max-width: 780px;
+  width: 100%;
+  margin: 2rem auto;
 }
