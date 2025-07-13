@@ -7,22 +7,36 @@ import InputLabel from '@mui/material/InputLabel';
 import Typography from '@mui/material/Box'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import prefectures from '../data/pref.json';
 
 function Form({ onRegister }) {
   const [pref, setPref] = useState('');
+  const [cities, setCities] = useState([]);
   const [city, setCity] = useState('');
+  const [placeDetail, setPlaceDetail] = useState('');
   const [detail, setDetail] = useState('');
 
+  // 都道府県が選ばれたとき、該当市区町村をバックエンドから取得
+  const handlePrefChange = (prefCode) => {
+    setPref(prefCode)
+    fetch(`http://localhost:5050/api/cities?prefCode=${prefCode}`)
+      .then((res) => res.json())
+      .then((data) => setCities(data))
+      .catch(console.error)
+  }
+
+  // 登録ボタンの処理
   const handleSubmit = () => {
-    console.log('入力内容:', detail);
     if (!pref || !city) return;
     onRegister({
       prefCode: pref,
-      cityCode: city,
+      cityId: city,
+      placeDetail: placeDetail,
       detail: detail
     });
     setPref('')
     setCity('')
+    setPlaceDetail('')
     setDetail('')
   };
   return (
@@ -36,12 +50,13 @@ function Form({ onRegister }) {
               labelId="pref-label"
               value={pref}
               label="都道府県"
-              onChange={(e) => setPref(e.target.value)}
+              onChange={(e) => handlePrefChange(e.target.value)}
             >
-              <MenuItem value=""></MenuItem>
-              <MenuItem value="1">東京</MenuItem>
-              <MenuItem value="2">大阪</MenuItem>
-              <MenuItem value="3">京都</MenuItem>
+            {prefectures.map(pref => (
+              <MenuItem key={pref.code} value={pref.code}>
+                {pref.name}
+              </MenuItem>
+            ))}
             </Select>
           </FormControl >
         </Box>
@@ -55,9 +70,11 @@ function Form({ onRegister }) {
               onChange={(e) => setCity(e.target.value)}
             >
               <MenuItem value=""></MenuItem>
-              <MenuItem value="1">千代田区</MenuItem>
-              <MenuItem value="2">京都市</MenuItem>
-              <MenuItem value="3">大阪市</MenuItem>
+              {cities.map((city) => (
+                <MenuItem key={city.cityId} value={city.cityId}>
+                  {city.cityName}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl >
         </Box>
@@ -69,6 +86,7 @@ function Form({ onRegister }) {
           variant="outlined"
           fullWidth
           margin="normal"
+          onChange={(e) => setPlaceDetail(e.target.value)}
         />
       </Box>
       <Box sx={{ display: 'flex' }}>
