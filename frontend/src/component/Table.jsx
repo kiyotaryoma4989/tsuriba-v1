@@ -1,15 +1,9 @@
 import { DataGrid } from '@mui/x-data-grid';
 
-function Table({ data, titles }) {
+function Table({ data, columns }) {
   if (!data || data.length === 0) {
     return <p>データがありません</p>;
   }
-
-  const columns = Object.keys(data[0]).map((key, index) => ({
-    field: key,
-    headerName: titles[index],
-    width: 150,
-  }));
 
   return (
     <DataGrid

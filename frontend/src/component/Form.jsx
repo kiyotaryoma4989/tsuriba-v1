@@ -17,8 +17,8 @@ function Form({ onRegister }) {
     console.log('入力内容:', detail);
     if (!pref || !city) return;
     onRegister({
-      pref: pref,
-      city: city,
+      prefCode: pref,
+      cityCode: city,
       detail: detail
     });
     setPref('')
@@ -39,9 +39,9 @@ function Form({ onRegister }) {
               onChange={(e) => setPref(e.target.value)}
             >
               <MenuItem value=""></MenuItem>
-              <MenuItem value="tokyo">東京</MenuItem>
-              <MenuItem value="osaka">大阪</MenuItem>
-              <MenuItem value="kyoto">京都</MenuItem>
+              <MenuItem value="1">東京</MenuItem>
+              <MenuItem value="2">大阪</MenuItem>
+              <MenuItem value="3">京都</MenuItem>
             </Select>
           </FormControl >
         </Box>
@@ -55,9 +55,9 @@ function Form({ onRegister }) {
               onChange={(e) => setCity(e.target.value)}
             >
               <MenuItem value=""></MenuItem>
-              <MenuItem value="tokyo">千代田区</MenuItem>
-              <MenuItem value="osaka">京都市</MenuItem>
-              <MenuItem value="kyoto">大阪市</MenuItem>
+              <MenuItem value="1">千代田区</MenuItem>
+              <MenuItem value="2">京都市</MenuItem>
+              <MenuItem value="3">大阪市</MenuItem>
             </Select>
           </FormControl >
         </Box>
