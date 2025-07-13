@@ -10,6 +10,12 @@
   font-size: 34px;
 }
 
+.mainContainer {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
 .formContainer {
   width: 600px;
   margin: 2rem auto;
@@ -21,4 +27,13 @@
   max-width: 960px;
   width: 100%;
   margin: 2rem auto;
+}
+
+.tsuribaDetailRow {
+  padding: 1rem 0;
+}
+
+.backButtonContainer {
+  width: 100%;
+  text-align: center;
 }

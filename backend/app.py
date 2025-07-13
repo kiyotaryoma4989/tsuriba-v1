@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from config import Config
 from models import db, Tsuriba
+from sqlalchemy import desc
 from prefecture import pref_map
 from city_util import get_city_name, get_cities_by_prefCode
 
@@ -24,10 +25,11 @@ def get_cities_by_pref():
     return jsonify(result)
 
 # 釣り場全件取得
+# TODO:上位何件だけとかはおいおい実装
 @app.route('/api/tsuriba/list')
 def get_tsuribaList():
     print('[LOG] GET リクエスト受信')
-    tsuribas = Tsuriba.query.all()
+    tsuribas = Tsuriba.query.order_by(desc(Tsuriba.id)).all()
     result = []
     for t in tsuribas:
         result.append({

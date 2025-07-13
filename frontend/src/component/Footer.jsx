@@ -3,7 +3,9 @@ function Footer() {
     <footer style={{
       width: '100%',
       backgroundColor: '#fefefe',
-      padding: '2rem 0'
+      padding: '2rem 0',
+      position: 'absolute',
+      bottom: '0'
     }}>
       <div style={{ textAlign: 'center' }}>
         <small>&copy;釣り場.com 2025</small>
