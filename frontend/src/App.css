@@ -1,26 +1,26 @@
 .header {
   width: 100%;
   margin: 0;
-  padding: 1rem 0;
+  padding: 8px 0;
   background-color: #fefefe;
 }
 
-.header .title {
-  color: #e60012;
-  font-size: 34px;
+.header .logo {
+  width: 200px;
+  height: 60px;
 }
 
 .mainContainer {
-  max-width: 980px;
+  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 }
 
 .formContainer {
-  width: 600px;
-  margin: 2rem auto;
-  padding: 2rem 2rem;
-  background-color: #fefefe;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .tableContainer {
@@ -36,4 +36,12 @@
 .backButtonContainer {
   width: 100%;
   text-align: center;
+}
+
+.towColumnContainer {
+  display: flex;
+}
+
+.mainColumn {
+  flex: 1;
 }

@@ -11,7 +11,7 @@ app.config.from_object(Config)
 CORS(app) 
 db.init_app(app) 
 
-# 市区町村取得処理
+# 都道府県コードから該当する市区町村を取得
 @app.route('/api/cities')
 def get_cities_by_pref():
     prefCode = request.args.get('prefCode')
@@ -23,6 +23,12 @@ def get_cities_by_pref():
         for c in cities
     ]
     return jsonify(result)
+
+# 全ての都道府県コードと該当する市区町村を取得
+@app.route('/api/pref/city')
+def get_prefs_with_cities():
+    from city_util import get_prefecture_city_list
+    return jsonify(get_prefecture_city_list())
 
 # 釣り場全件取得
 # TODO:上位何件だけとかはおいおい実装

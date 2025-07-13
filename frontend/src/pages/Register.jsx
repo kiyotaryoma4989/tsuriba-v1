@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Header from '../component/Header'
 import Footer from '../component/Footer'
+import Accordion from '../component/Accordion'
 import Form from '../component/Form'
 import Table from '../component/Table'
 import { useNavigate } from 'react-router-dom'
@@ -55,11 +56,20 @@ function Register() {
   return (
     <>
       <Header />
-      <div className='formContainer'>
-        <Form onRegister={handleRegister} />
-      </div>
-      <div className='tableContainer'>
-        <Table data={results} columns={columns} onRowclick={handleRowClick} />
+      <div className='mainContainer'>
+        <div className='towColumnContainer'>
+          <div>
+            <Accordion />
+          </div>
+          <div className='mainColumn'>
+            <div className='formContainer'>
+              <Form onRegister={handleRegister} />
+            </div>
+            <div className='tableContainer'>
+              <Table data={results} columns={columns} onRowclick={handleRowClick} />
+            </div>
+          </div>
+        </div>
       </div>
       <Footer />
     </>

@@ -4,8 +4,9 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import Typography from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import prefectures from '../data/pref.json';
 
@@ -40,7 +41,7 @@ function Form({ onRegister }) {
     setDetail('')
   };
   return (
-    <div>
+    <Paper sx={{p: 4}}>
       <Box sx={{ display: 'flex' }}>
         <Typography sx={{ width: 120 }}>釣り場住所</Typography>
         <Box sx={{ width: '180px' }}>
@@ -114,7 +115,7 @@ function Form({ onRegister }) {
           borderRadius: '8px',
         }} onClick={handleSubmit}>登録</Button>
       </Box>
-    </div>
+    </Paper>
   )
 }
 
