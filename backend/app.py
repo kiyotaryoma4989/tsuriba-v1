@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from config import Config
 from models import db, Tsuriba
@@ -6,10 +6,14 @@ from sqlalchemy import desc
 from prefecture import pref_map
 from city_util import get_city_name, get_cities_by_prefCode
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../frontend/build")
 app.config.from_object(Config)
 CORS(app) 
 db.init_app(app) 
+
+@app.route("/")
+def index():
+    return send_from_directory(app.static_folder, "index.html")
 
 # 都道府県コードから該当する市区町村を取得
 @app.route('/api/cities')
