@@ -6,7 +6,7 @@ from sqlalchemy import desc
 from prefecture import pref_map
 from city_util import get_city_name, get_cities_by_prefCode
 
-app = Flask(__name__, static_folder="../frontend/build")
+app = Flask(__name__, static_folder="../frontend/dist")
 app.config.from_object(Config)
 CORS(app) 
 db.init_app(app) 

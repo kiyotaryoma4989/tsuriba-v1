@@ -12,7 +12,7 @@ function Register() {
 
   // 釣り場データの全件取得
   const fetchData = () => {
-    fetch('http://localhost:5050/api/tsuriba/list')
+    fetch('/api/tsuriba/list')
       .then(res => res.json())
       .then(json => setResults(json))
       .catch(err => console.error('データ取得失敗:', err));
@@ -30,7 +30,7 @@ function Register() {
 
   // 新規登録
   const handleRegister = (formData) => {
-    fetch('http://localhost:5050/api/tsuriba/create', {
+    fetch('/api/tsuriba/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),

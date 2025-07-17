@@ -13,7 +13,7 @@ function prefAccordion() {
 
   // 初期データ読み込み
   useEffect(() => {
-    fetch('http://localhost:5050/api/pref/city')
+    fetch(`/api/pref/city`)
       .then(res => res.json())
       .then(json => setResults(json))
       .catch(err => console.error('データ取得失敗:', err));

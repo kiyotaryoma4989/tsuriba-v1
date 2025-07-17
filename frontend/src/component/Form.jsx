@@ -20,7 +20,7 @@ function Form({ onRegister }) {
   // 都道府県が選ばれたとき、該当市区町村をバックエンドから取得
   const handlePrefChange = (prefCode) => {
     setPref(prefCode)
-    fetch(`http://localhost:5050/api/cities?prefCode=${prefCode}`)
+    fetch(`/api/cities?prefCode=${prefCode}`)
       .then((res) => res.json())
       .then((data) => setCities(data))
       .catch(console.error)
