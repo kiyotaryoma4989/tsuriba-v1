@@ -1,0 +1,47 @@
+.header {
+  width: 100%;
+  margin: 0;
+  padding: 8px 0;
+  background-color: #fefefe;
+}
+
+.header .logo {
+  width: 200px;
+  height: 60px;
+}
+
+.mainContainer {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.formContainer {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tableContainer {
+  max-width: 960px;
+  width: 100%;
+  margin: 2rem auto;
+}
+
+.tsuribaDetailRow {
+  padding: 1rem 0;
+}
+
+.backButtonContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.towColumnContainer {
+  display: flex;
+}
+
+.mainColumn {
+  flex: 1;
+}

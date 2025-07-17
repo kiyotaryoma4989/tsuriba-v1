@@ -1,0 +1,29 @@
+:root {
+  font-family: "Noto Sans JP", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  position: relative;
+
+  background-color: #fdf4f4;
+}
+
+body {
+  min-height: 100vh;
+  padding-bottom: 85px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.inner {
+  max-width: 980px;
+  margin: 0 auto;
+}
