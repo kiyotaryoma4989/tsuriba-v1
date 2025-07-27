@@ -1,13 +1,13 @@
 CREATE TABLE t_cities (
-	 id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
     pref_name TEXT NOT NULL,
     city_name TEXT NOT NULL,
-    city_id VARCHAR(6) UNIQUE NOT NULL,
+    city_code VARCHAR(6) UNIQUE NOT NULL,
     pref_code INTEGER NOT NULL
 );
 
 -- データの挿入dev_tsuriba
-INSERT INTO t_cities (pref_name, city_name, city_id, pref_code) VALUES
+INSERT INTO t_cities (pref_name, city_name, city_code, pref_code) VALUES
 ('北海道', '札幌市', '011002', 1),
 ('北海道', '中央区', '011011', 1),
 ('北海道', '北区', '011029', 1),

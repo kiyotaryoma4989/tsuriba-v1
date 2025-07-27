@@ -1,40 +1,27 @@
 import Button from '@mui/material/Button';
 import logo from '../assets/logo1.png';
-import Swal from 'sweetalert2'
 
-function Header() {
+function Header({ openMenu, handleMemberRegistration, handleLogin }) {
 
-  const handleMemberRegistration = () => {
-    Swal.fire({
-      title: 'sorry...',
-      text: 'まだ実装できてません。',
-      icon: 'info',
-      confirmButtonText: 'OK'
-    })
-  }
-  const handleLogin = () => {
-    Swal.fire({
-      title: 'sorry...',
-      text: 'まだ実装できてません。',
-      icon: 'info',
-      confirmButtonText: 'OK'
-    })
-  }
+  // SVGアイコンコンポーネント
+  const MenuIcon = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
 
   return (
     <header className="header">
       <div className="inner">
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-          }}>
+        <div className='header-contents'>
           <div className="titleContainer">
-            <h2 className="logo"><img src={logo} alt="logo" /></h2>
+            <h2 className="logo">
+              <img src={logo} alt="logo" />
+            </h2>
             <small>まだ無名の釣り場情報サイト</small>
           </div>
-          <div>
-            <Button variant="contained" sx={{
+          <div className='header-btns'>
+            <Button className='btn-userRegist' variant="contained" sx={{
               backgroundColor: '#e60012',
               '&:hover': {
                 backgroundColor: '#c20002',
@@ -45,7 +32,7 @@ function Header() {
               borderRadius: '8px',
               marginRight: '12px'
             }} onClick={handleMemberRegistration}>会員登録</Button>
-            <Button variant="contained" sx={{
+            <Button className='btn-login' variant="contained" sx={{
               color: '#e60012',
               backgroundColor: '#fff',
               border: '1px solid #e60012',
@@ -58,6 +45,27 @@ function Header() {
               borderRadius: '8px',
             }} onClick={handleLogin}>ログイン</Button>
           </div>
+          {/* ハンバーガーボタン */}
+          <button
+            className='btn-hamburger' 
+            onClick={openMenu}
+            aria-label="メニューを開く"
+          >
+            <div style={{
+              position: 'relative',
+              width: '24px',
+              height: '24px'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                transition: 'all 0.3s ease'
+              }}>
+                <MenuIcon />
+              </div>
+            </div>
+          </button>
         </div>
       </div>
     </header>

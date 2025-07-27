@@ -6,21 +6,21 @@ import {
   Typography
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 function prefAccordion() {
-
   const [results, setResults] = useState([]);
 
   // 初期データ読み込み
   useEffect(() => {
-    fetch(`/api/pref/city`)
+    fetch(`${baseUrl}/api/pref/city`)
       .then(res => res.json())
       .then(json => setResults(json))
       .catch(err => console.error('データ取得失敗:', err));
   }, []);
 
   return (
-    <div style={{ width: '200px' }}>
+    <div>
       <Accordion>
         <AccordionSummary sx={{
           color: '#fff',

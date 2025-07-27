@@ -18,7 +18,7 @@ class City(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     pref_name = db.Column(db.String(24))
     city_name = db.Column(db.String(24), nullable=False)
-    city_id = db.Column(db.Integer, nullable=False)
+    city_code = db.Column(db.Integer, nullable=False)
     pref_code = db.Column(db.Integer, nullable=False)
 
 # ユーザーモデル

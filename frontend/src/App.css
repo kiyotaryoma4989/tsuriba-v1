@@ -5,28 +5,36 @@
   background-color: #fefefe;
 }
 
+.header-contents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .header .logo {
   width: 200px;
-  height: 60px;
 }
 
 .mainContainer {
-  max-width: 1280px;
+  max-width: 980px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 2rem 0;
+}
+
+.sideMenu {
+  max-width: 220px;
+  width: 100%;
 }
 
 .formContainer {
-  max-width: 960px;
   width: 100%;
   margin: 0 auto;
 }
 
 .tableContainer {
-  max-width: 960px;
   width: 100%;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 
 .tsuribaDetailRow {
@@ -40,8 +48,44 @@
 
 .towColumnContainer {
   display: flex;
+  gap: 1rem;
 }
 
 .mainColumn {
+  width: 100%;
   flex: 1;
+}
+
+.btn-hamburger {
+  display: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 50;
+  transition: background-color 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .header-contents {
+    padding: 0 1rem;
+  }
+
+  .mainContainer {
+    padding: 1rem;
+  }
+
+  .header-btns {
+    display: none;
+  }
+
+  .btn-hamburger {
+    display: block;
+  }
+
+  .sideMenu {
+    display: none;
+  }
 }

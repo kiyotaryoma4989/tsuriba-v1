@@ -38,14 +38,13 @@ def get_prefs_with_cities():
 # TODO:上位何件だけとかはおいおい実装
 @app.route('/api/tsuriba/list')
 def get_tsuribaList():
-    print('[LOG] GET リクエスト受信')
     tsuribas = Tsuriba.query.order_by(desc(Tsuriba.id)).all()
     result = []
     for t in tsuribas:
         result.append({
             'id': t.id,
             'pref': pref_map.get(t.pref_code),
-            'city': get_city_name(t.city_id),
+            'city': get_city_name(t.id),
             'detail': t.detail
         })
     return jsonify(result), 200
