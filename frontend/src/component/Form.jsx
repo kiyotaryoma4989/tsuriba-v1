@@ -57,13 +57,22 @@ function Form({ onRegister }) {
     };
     if (invalid) return
 
-    onRegister({
+    const success = onRegister({
       name: tsuribaName,
       prefCode: pref,
       cityId: city,
       placeDetail: placeDetail,
       detail: detail
     });
+
+    if (success) {
+      // フォームをクリア
+      setTsuribaName('')
+      setPref('')
+      setCity('')
+      setPlaceDetail('')
+      setDetail('')
+    }
   };
   return (
     <Paper sx={{
