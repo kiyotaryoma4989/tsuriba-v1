@@ -19,6 +19,6 @@ jobs:
         username: ec2-user
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd /home/app/tsuriba-v/
+          cd /home/ec2-user/app/tsuriba-v/
           git pull origin main
           sudo systemctl restart flask-app
