@@ -21,4 +21,6 @@ jobs:
         script: |
           cd /home/ec2-user/app/tsuriba-v1/
           git pull origin main
+          npm ci
+          npm run build
           sudo systemctl restart tsuridoko.service
