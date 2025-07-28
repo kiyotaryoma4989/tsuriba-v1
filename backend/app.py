@@ -44,7 +44,7 @@ def get_tsuribaList():
         result.append({
             'id': t.id,
             'pref': pref_map.get(t.pref_code),
-            'city': get_city_name(t.id),
+            'city': get_city_name(t.city_id),
             'placeDetail': t.place_detail,
             'detail': t.detail
         })
