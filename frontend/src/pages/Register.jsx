@@ -85,10 +85,10 @@ function Register() {
 
   // テーブル設定
   const columns = [
-    { field: 'name', headerName: '釣り場名', width: 150 },
     { field: 'id', headerName: 'ID', width: 80 },
     { field: 'pref', headerName: '都道府県', width: 100 },
     { field: 'city', headerName: '市区町村', width: 100 },
+    { field: 'name', headerName: '釣り場名', width: 150 },
     { field: 'placeDetail', headerName: '場所の詳細', flex: 1 }
   ];
 
@@ -112,14 +112,14 @@ function Register() {
       </div>
       <Footer />
       {/* 成功メッセージ */}
-      <Snackbar open={openSuccess} autoHideDuration={3000} onClose={() => setOpen(false)}>
-        <Alert severity="success" onClose={() => setOpen(false)}>
+      <Snackbar open={openSuccess} autoHideDuration={3000} onClose={() => setOpenSuccess(false)}>
+        <Alert severity="success" onClose={() => setOpenSuccess(false)}>
           登録が完了しました！
         </Alert>
       </Snackbar>
       {/* 失敗メッセージ */}
-      <Snackbar open={openFail} autoHideDuration={3000} onClose={() => setOpen(false)}>
-        <Alert severity="error" onClose={() => setOpen(false)}>
+      <Snackbar open={openFail} autoHideDuration={3000} onClose={() => setOpenFail(false)}>
+        <Alert severity="error" onClose={() => setOpenFail(false)}>
           登録処理に失敗しました。もう一度、お試し下さい。
         </Alert>
       </Snackbar>
