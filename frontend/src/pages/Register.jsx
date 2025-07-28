@@ -7,6 +7,8 @@ import Table from '../component/Table'
 import Menu from '../component/Menu'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -17,6 +19,9 @@ function Register() {
 
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
+
+  const [openSuccess, setOpen] = useState(false); // Snackbarの開閉状態
+  const [openFail, setOpenFail] = useState(false);
 
   // 釣り場データの全件取得
   const fetchData = () => {
@@ -45,10 +50,25 @@ function Register() {
     })
       .then(res => {
         if (!res.ok) throw new Error('登録に失敗しました');
+        
+        // フォームをクリア
+        setTsuribaName('')
+        setPref('')
+        setCity('')
+        setPlaceDetail('')
+        setDetail('')
+    
+        // 成功Snackbarを表示
+        setOpenSuccess(true);
+
         return res.json();
       })
       .then(() => fetchData()) // 成功後に再取得
-      .catch(err => console.error('登録失敗:', err));
+      .catch(err => {
+        console.error('登録失敗:', err)
+        // 失敗Snackbarを表示
+        setOpenFail(true);
+      });
   };
 
   // 新規会員登録
@@ -72,11 +92,11 @@ function Register() {
 
   // テーブル設定
   const columns = [
+    { field: 'name', headerName: '釣り場名', width: 150 },
     { field: 'id', headerName: 'ID', width: 80 },
     { field: 'pref', headerName: '都道府県', width: 100 },
     { field: 'city', headerName: '市区町村', width: 100 },
-    { field: 'placeDetail', headerName: '場所の詳細', width: 250 },
-    { field: 'detail', headerName: '詳細', flex: 1 },
+    { field: 'placeDetail', headerName: '場所の詳細', flex: 1 }
   ];
 
   return (
@@ -98,6 +118,18 @@ function Register() {
         </div>
       </div>
       <Footer />
+      {/* 成功メッセージ */}
+      <Snackbar open={openSuccess} autoHideDuration={3000} onClose={() => setOpen(false)}>
+        <Alert severity="success" onClose={() => setOpen(false)}>
+          登録しました！
+        </Alert>
+      </Snackbar>
+      {/* 失敗メッセージ */}
+      <Snackbar open={openFail} autoHideDuration={3000} onClose={() => setOpen(false)}>
+        <Alert severity="success" onClose={() => setOpen(false)}>
+          登録処理に失敗しました。もう一度、お試し下さい。
+        </Alert>
+      </Snackbar>
       <Menu isOpen={isMenuOpen} closeMenu={closeMenu} handleMemberRegistration={handleMemberRegistration} handleLogin={handleLogin} />
     </>
   )

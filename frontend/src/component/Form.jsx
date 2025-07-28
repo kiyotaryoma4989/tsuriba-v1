@@ -8,18 +8,20 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import prefectures from '../data/pref.json';
+
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 function Form({ onRegister }) {
+  const [tsuribaName, setTsuribaName] = useState('');
   const [pref, setPref] = useState('');
   const [cities, setCities] = useState([]);
   const [city, setCity] = useState('');
   const [placeDetail, setPlaceDetail] = useState('');
   const [detail, setDetail] = useState('');
-  const [open, setOpen] = useState(false); // Snackbarの開閉状態
+  const [nameError, setNameError] = useState("");
+  const [placeError, setPlaceError] = useState("");
+  const [placeDetailError, setPlaceDetailError] = useState("");
 
   // 都道府県が選ばれたとき、該当市区町村をバックエンドから取得
   const handlePrefChange = (prefCode) => {
@@ -32,22 +34,36 @@ function Form({ onRegister }) {
 
   // 登録ボタンの処理
   const handleSubmit = () => {
-    if (!pref || !city) return;
+
+    // バリデーション
+    let invalid = false;
+    if (tsuribaName.trim() === "") {
+      setNameError("名前を入力してください");
+      invalid = true;
+    } else {
+      setNameError("")
+    };
+    if (!pref || !city) {
+      setPlaceError("都道府県、市区町村を入力してください");
+      invalid = true;
+    }else {
+      setPlaceError("")
+    };
+    if (placeDetail.trim() === "") {
+      setPlaceDetailError("場所の詳細を入力してください");
+      invalid = true;
+    }else {
+      setPlaceError("")
+    };
+    if (invalid) return
+
     onRegister({
+      name: tsuribaName,
       prefCode: pref,
       cityId: city,
       placeDetail: placeDetail,
       detail: detail
     });
-    
-    // フォームをクリア
-    setPref('')
-    setCity('')
-    setPlaceDetail('')
-    setDetail('')
-
-    // 成功Snackbarを表示
-    setOpen(true);
   };
   return (
     <Paper sx={{
@@ -57,54 +73,73 @@ function Form({ onRegister }) {
       }
     }}>
       <Box sx={{ display: { xs: 'block', sm: 'flex' } }}>
-        <Typography sx={{ width: 120 }}>釣り場住所</Typography>
-        <Box sx={{display: 'flex'}}>
-          <Box sx={{ width: '180px' }}>
-            <FormControl fullWidth>
-              <InputLabel id="pref-label">都道府県</InputLabel>
-              <Select
-                labelId="pref-label"
-                value={pref}
-                label="都道府県"
-                onChange={(e) => handlePrefChange(e.target.value)}
-              >
-                {prefectures.map(pref => (
-                  <MenuItem key={pref.code} value={pref.code}>
-                    {pref.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl >
-          </Box>
-          <Box sx={{ width: '180px' }}>
-            <FormControl fullWidth>
-              <InputLabel id="city-label">市区町村</InputLabel>
-              <Select
-                labelId="city-label"
-                value={city}
-                label="市区町村"
-                onChange={(e) => setCity(e.target.value)}
-              >
-                <MenuItem value=""></MenuItem>
-                {cities.map((city) => (
-                  <MenuItem key={city.cityId} value={city.cityId}>
-                    {city.cityName}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl >
-          </Box>
+        <Typography sx={{ minWidth: 120 }}>釣り場名 *</Typography>
+        <Box sx={{ width: "100%" }} >
+          <TextField
+            value={tsuribaName}
+            label="釣り場名"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => setTsuribaName(e.target.value)}
+          />
+          {nameError && <p style={{ color: "#e60012" }}>{nameError}</p>}
         </Box>
       </Box>
       <Box sx={{ display: { xs: 'block', sm: 'flex' }, marginTop: 2 }}>
-        <Typography sx={{ minWidth: 120}}>場所の詳細</Typography>
-        <TextField
-          value={placeDetail}
-          label="場所の詳細"
-          variant="outlined"
-          fullWidth
-          onChange={(e) => setPlaceDetail(e.target.value)}
-        />
+        <Typography sx={{ width: 120 }}>釣り場住所 *</Typography>
+        <Box>
+          <Box sx={{ display: 'flex' }}>
+            <Box sx={{ width: '180px' }}>
+              <FormControl fullWidth>
+                <InputLabel id="pref-label">都道府県</InputLabel>
+                <Select
+                  labelId="pref-label"
+                  value={pref}
+                  label="都道府県"
+                  onChange={(e) => handlePrefChange(e.target.value)}
+                >
+                  {prefectures.map(pref => (
+                    <MenuItem key={pref.code} value={pref.code}>
+                      {pref.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl >
+            </Box>
+            <Box sx={{ width: '180px' }}>
+              <FormControl fullWidth>
+                <InputLabel id="city-label">市区町村</InputLabel>
+                <Select
+                  labelId="city-label"
+                  value={city}
+                  label="市区町村"
+                  onChange={(e) => setCity(e.target.value)}
+                >
+                  <MenuItem value=""></MenuItem>
+                  {cities.map((city) => (
+                    <MenuItem key={city.cityId} value={city.cityId}>
+                      {city.cityName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl >
+            </Box>
+          </Box>
+          {placeError && <p style={{ color: "#e60012" }}>{placeError}</p>}
+        </Box>
+      </Box>
+      <Box sx={{ display: { xs: 'block', sm: 'flex' }, marginTop: 2 }}>
+        <Typography sx={{ minWidth: 120 }}>場所の詳細 *</Typography>
+        <Box sx={{ width: "100%" }} >
+          <TextField
+            value={placeDetail}
+            label="場所の詳細"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => setPlaceDetail(e.target.value)}
+          />
+          {placeDetailError && <p style={{ color: "#e60012" }}>{placeDetailError}</p>}
+        </Box>
       </Box>
       <Box sx={{ display: { xs: 'block', sm: 'flex' }, marginTop: 2 }}>
         <Typography sx={{ minWidth: 120 }}>詳細情報</Typography>
@@ -131,12 +166,6 @@ function Form({ onRegister }) {
           borderRadius: '8px',
         }} onClick={handleSubmit}>登録</Button>
       </Box>
-      {/* 成功メッセージ */}
-      <Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
-        <Alert severity="success" onClose={() => setOpen(false)}>
-          送信が成功しました！
-        </Alert>
-      </Snackbar>
     </Paper>
   )
 }

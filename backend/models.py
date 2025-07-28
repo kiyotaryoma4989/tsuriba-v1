@@ -7,6 +7,7 @@ db = SQLAlchemy()
 class Tsuriba(db.Model):
     __tablename__ = 't_tsuriba'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text)
     pref_code = db.Column(db.Integer)
     city_id = db.Column(db.Integer)
     place_detail = db.Column(db.Text)

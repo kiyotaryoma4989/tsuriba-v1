@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, abort
 from flask_cors import CORS
 from config import Config
 from models import db, Tsuriba
@@ -43,6 +43,7 @@ def get_tsuribaList():
     for t in tsuribas:
         result.append({
             'id': t.id,
+            'name': t.name,
             'pref': pref_map.get(t.pref_code),
             'city': get_city_name(t.city_id),
             'placeDetail': t.place_detail,
@@ -50,17 +51,34 @@ def get_tsuribaList():
         })
     return jsonify(result), 200
 
+# 釣り場情報の単体取得
+@app.route('/api/tsuriba/<int:tsuriba_id>')
+def get_tsuriba_by_id(tsuriba_id):
+    t = db.session.get(Tsuriba, tsuriba_id)
+    print(t)
+    if t is None:
+        return abort(404, description="釣り場が見つかりませんでした。")
+    return jsonify({
+        "id": t.id,
+        "name": t.name,
+        'pref': pref_map.get(t.pref_code),
+        'city': get_city_name(t.city_id),
+        "place_detail": t.place_detail,
+        "detail": t.detail
+    }), 200
+
 # 釣り場登録処理
 @app.route('/api/tsuriba/create', methods=['POST'])
 def create_tsuriba():
     data = request.get_json()
 
-    # 入力チェック（シンプルな例）
+    # 入力チェック
     if not data or not data.get('prefCode') or not data.get('cityId'):
         return jsonify({'error': '都道府県と市区町村は必須です'}), 400
 
     # モデルインスタンスを作成
     new_tsuriba = Tsuriba(
+        name = data['name'],
         pref_code = data['prefCode'],
         city_id = data['cityId'],
         place_detail = data['placeDetail'],

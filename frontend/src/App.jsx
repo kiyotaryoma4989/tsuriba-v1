@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Register />} />
         <Route path="/tsuriba/:id" element={<TsuribaDetail />} />
+        <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
