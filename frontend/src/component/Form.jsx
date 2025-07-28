@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import prefectures from '../data/pref.json';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -17,6 +19,7 @@ function Form({ onRegister }) {
   const [city, setCity] = useState('');
   const [placeDetail, setPlaceDetail] = useState('');
   const [detail, setDetail] = useState('');
+  const [open, setOpen] = useState(false); // Snackbarの開閉状態
 
   // 都道府県が選ばれたとき、該当市区町村をバックエンドから取得
   const handlePrefChange = (prefCode) => {
@@ -36,10 +39,15 @@ function Form({ onRegister }) {
       placeDetail: placeDetail,
       detail: detail
     });
+    
+    // フォームをクリア
     setPref('')
     setCity('')
     setPlaceDetail('')
     setDetail('')
+
+    // 成功Snackbarを表示
+    setOpen(true);
   };
   return (
     <Paper sx={{
@@ -91,6 +99,7 @@ function Form({ onRegister }) {
       <Box sx={{ display: { xs: 'block', sm: 'flex' }, marginTop: 2 }}>
         <Typography sx={{ minWidth: 120}}>場所の詳細</Typography>
         <TextField
+          value={placeDetail}
           label="場所の詳細"
           variant="outlined"
           fullWidth
@@ -100,6 +109,7 @@ function Form({ onRegister }) {
       <Box sx={{ display: { xs: 'block', sm: 'flex' }, marginTop: 2 }}>
         <Typography sx={{ minWidth: 120 }}>詳細情報</Typography>
         <TextField
+          value={detail}
           label="詳細情報"
           variant="outlined"
           fullWidth
@@ -121,6 +131,12 @@ function Form({ onRegister }) {
           borderRadius: '8px',
         }} onClick={handleSubmit}>登録</Button>
       </Box>
+      {/* 成功メッセージ */}
+      <Snackbar open={open} autoHideDuration={3000} onClose={() => setOpen(false)}>
+        <Alert severity="success" onClose={() => setOpen(false)}>
+          送信が成功しました！
+        </Alert>
+      </Snackbar>
     </Paper>
   )
 }

@@ -44,7 +44,6 @@ function Register() {
       body: JSON.stringify(formData),
     })
       .then(res => {
-        console.log(res);
         if (!res.ok) throw new Error('登録に失敗しました');
         return res.json();
       })

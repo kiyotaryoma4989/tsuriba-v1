@@ -45,6 +45,7 @@ def get_tsuribaList():
             'id': t.id,
             'pref': pref_map.get(t.pref_code),
             'city': get_city_name(t.id),
+            'placeDetail': t.place_detail,
             'detail': t.detail
         })
     return jsonify(result), 200
