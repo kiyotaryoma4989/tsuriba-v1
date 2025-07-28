@@ -33,7 +33,7 @@ function Form({ onRegister }) {
   }
 
   // 登録ボタンの処理
-  const handleSubmit = () => {
+  const handleSubmit = async  () => {
 
     // バリデーション
     let invalid = false;
@@ -57,7 +57,7 @@ function Form({ onRegister }) {
     };
     if (invalid) return
 
-    const success = onRegister({
+    const success = await onRegister({
       name: tsuribaName,
       prefCode: pref,
       cityId: city,
