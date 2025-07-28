@@ -43,7 +43,7 @@ function Register() {
 
   // 新規登録
   const handleRegister = (formData) => {
-    fetch(`${baseUrl}/api/tsuriba/create`, {
+    return fetch(`${baseUrl}/api/tsuriba/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),

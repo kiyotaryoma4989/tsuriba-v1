@@ -51,7 +51,7 @@ function TsuribaDetail() {
                     </div>
                     <div className='tsuribaDetailRow'>
                         <p>詳細情報：</p>
-                        <p>{tsuribaData.detail}</p>
+                        <p style={{ whiteSpace: "pre-wrap" }}>{tsuribaData.detail}</p>
                     </div>
                 </div>
                 <div className='tsuribaDetailRow backButtonContainer'>
