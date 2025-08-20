@@ -98,7 +98,7 @@ function Register() {
       <div className='mainContainer'>
         <div className='towColumnContainer'>
           <div className='sideMenu'>
-            <Accordion />
+            <Accordion setSelectedPrefData={setResults} />
           </div>
           <div className='mainColumn'>
             <div className='formContainer'>
@@ -123,7 +123,7 @@ function Register() {
           登録処理に失敗しました。もう一度、お試し下さい。
         </Alert>
       </Snackbar>
-      <Menu isOpen={isMenuOpen} closeMenu={closeMenu} handleMemberRegistration={handleMemberRegistration} handleLogin={handleLogin} />
+      <Menu isOpen={isMenuOpen} closeMenu={closeMenu} handleMemberRegistration={handleMemberRegistration} handleLogin={handleLogin} setSelectedPrefData={setResults} />
     </>
   )
 }

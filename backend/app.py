@@ -51,6 +51,29 @@ def get_tsuribaList():
         })
     return jsonify(result), 200
 
+# 釣り場の検索  (都道府県コード指定)
+@app.route('/api/tsuriba/search')
+def search_tsuriba():
+    # 都道府県コードをクエリパラメータから取得
+    pref_code = request.args.get('pref', type=int)
+    # prefが指定されていなければ全件
+    query = Tsuriba.query
+    if pref_code is not None:
+        query = query.filter_by(pref_code=pref_code)
+    tsuribas = query.order_by(desc(Tsuriba.id)).all()
+
+    result = []
+    for t in tsuribas:
+        result.append({
+            'id': t.id,
+            'name': t.name,
+            'pref': pref_map.get(t.pref_code),
+            'city': get_city_name(t.city_id),
+            'placeDetail': t.place_detail,
+            'detail': t.detail
+        })
+    return jsonify(result), 200
+
 # 釣り場情報の単体取得
 @app.route('/api/tsuriba/<int:tsuriba_id>')
 def get_tsuriba_by_id(tsuriba_id):

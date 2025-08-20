@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import Accordion from '../component/Accordion'
 
-function Menu({ isOpen, closeMenu, handleMemberRegistration, handleLogin }) {
+function Menu({ isOpen, closeMenu, handleMemberRegistration, handleLogin , setSelectedPrefData }) {
 
     const CloseIcon = () => (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +61,7 @@ function Menu({ isOpen, closeMenu, handleMemberRegistration, handleLogin }) {
                     </div>
 
                     {/* メニューアイテム */}
-                    <Accordion></Accordion>
+                    <Accordion setSelectedPrefData={ setSelectedPrefData }/>
                 </div>
             </nav>
         </div>
